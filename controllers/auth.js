@@ -41,7 +41,8 @@ exports.signupController = async (req, res) => {
     const message = `
     <p style={{fontSize:"1.3rem", padding:"1rem 0rem"}}>Thank you for creating an account </p>
     <p style={{fontSize:"1.3rem", padding:"1rem 0rem"}}>To continue, please confirm your email address by clicking the link below </p>
-    ${process.env.BASE_URL}/auth/verify/${newUser.id}/${token.token}`;
+    
+    ${process.env.BASE_URL}auth/verify/${newUser._id}/${token.token}`;
     await sendEmail(newUser.email, "supremewavescapital Account Activation", message);
     res
       .status(201)
@@ -125,6 +126,8 @@ exports.signinController = async (req, res) => {
 };
 
 exports.email =  async (req, res) => {
+  console.log(req.params.id)
+  console.log(req.params.token)
   try {
     const user = await User.findOne({ _id: req.params.id });
     if (!user) return res.status(400).json({ errorMessage: "Invalid Link" });
@@ -135,11 +138,13 @@ exports.email =  async (req, res) => {
     });
     if (!token) return res.status(400).json({ errorMessage: "Invalid Link" });
 
-    await User.updateOne({ _id: user._id, verified: true });
+    const foundUser = await User.updateOne({ _id: user._id, verified: true });
     await token.remove();
 
-    res.status(200).json({ successMessage: "Email verified successfully" });
+    res.status(200).json({
+      foundUser,
+       successMessage: "Email verified successfully" });
   } catch (error) {
-    res.status(500).json({ errorMessage: "Server Error" });
+    res.status(500).json({ errorMessage: "verification Server Error" });
   }
 };
