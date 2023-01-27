@@ -63,6 +63,7 @@ exports.signinController = async (req, res) => {
   console.log(req.body);
   try {
     const user = await User.findOne({ email });
+    console.log(user)
     if (!user) {
       return res.status(400).json({
         errorMessage: "Invalid Credentials",
@@ -77,22 +78,10 @@ exports.signinController = async (req, res) => {
     }
 
     if (!user.verified) {
-      let token = await Token.findOne({ userId: user._id });
-      if (!token) {
-        token = await new Token({
-          userId: user._id,
-          token: crypto.randomBytes(32).toString("hex"),
-        }).save();
-        const message = `
-        <h1></h1>
-        ${process.env.BASE_URL}/user/verify/${user.id}/${token.token}`;
-        await sendEmail(user.email, "Verify Email", message);
-      }
-
       return res
         .status(400)
         .json({
-          errorMessage: "An Email was sent to your account please verify.",
+          errorMessage: "Please verify your email!",
         });
     }
     const payload = {
@@ -126,25 +115,28 @@ exports.signinController = async (req, res) => {
 };
 
 exports.email =  async (req, res) => {
+  const idUser = req.params.id
+  const tokenUser = req.params.token
   console.log(req.params.id)
   console.log(req.params.token)
   try {
-    const user = await User.findOne({ _id: req.params.id });
-    if (!user) return res.status(400).json({ errorMessage: "Invalid Link" });
+		const user = await User.findById({ _id: idUser});
+    console.log(user)
+		if (!user) return res.status(400).json({ errorMessage: "Invalid link" });
 
-    const token = await Token.findOne({
-      userId: user._id,
-      token: req.params.token,
-    });
-    if (!token) return res.status(400).json({ errorMessage: "Invalid Link" });
+		const token = await Token.findOne({
+			userId: user._id,
+			token: tokenUser,
+		});
+    console.log(token)
 
-    const foundUser = await User.updateOne({ _id: user._id, verified: true });
-    await token.remove();
+		if (!token) return res.status(400).send({ errorMessage: "Invalid link" });
 
-    res.status(200).json({
-      foundUser,
-       successMessage: "Email verified successfully" });
-  } catch (error) {
-    res.status(500).json({ errorMessage: "verification Server Error" });
-  }
+		await User.updateOne({ _id: idUser }, {$set:{ verified: true }});
+		await token.remove();
+
+		res.status(200).send({ successMessage: "Email verified successfully" });
+	} catch (error) {
+		res.status(500).send({ errorMessage: "Internal Server Error" });
+	}
 };
