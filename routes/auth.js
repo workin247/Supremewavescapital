@@ -1,5 +1,9 @@
 const express = require("express");
-const { signupController, signinController, email,  } = require("../controllers/auth");
+const {
+  signupController,
+  signinController,
+  email,
+} = require("../controllers/auth");
 const {
   validatorResult,
   signupValidator,
