@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6e3703b.css",
-    "main.js": "/static/js/main.c4a7cdad.js",
+    "main.css": "/static/css/main.3bd7de5f.css",
+    "main.js": "/static/js/main.e8680a35.js",
     "static/media/hero.jpg": "/static/media/hero.9c12fa55f20fa6de0d07.jpg",
     "static/media/rate.png": "/static/media/rate.853de1b784dfdbb78dc7.png",
     "static/media/coin.jpg": "/static/media/coin.fb48dba81e859181677c.jpg",
     "static/media/icon.png": "/static/media/icon.d4aacb21bd8c16a92493.png",
     "static/media/stock.png": "/static/media/stock.a7725f56e2a6ec2892e2.png",
+    "static/media/loan.jpg": "/static/media/loan.659f3de4aa5ec1d1aee5.jpg",
     "static/media/hero3.jpg": "/static/media/hero3.41d84077baf30bc52332.jpg",
     "static/media/trading.jpg": "/static/media/trading.1af806ece4af388c8fcf.jpg",
     "static/media/crypto2.jpg": "/static/media/crypto2.e70d4885ece6e74f5ed9.jpg",
@@ -36,11 +37,11 @@
     "static/media/crypto.jpg": "/static/media/crypto.66e5daeaab733f31b067.jpg",
     "static/media/register.png": "/static/media/register.57bd0e8dfbbcea9227b8.png",
     "index.html": "/index.html",
-    "main.e6e3703b.css.map": "/static/css/main.e6e3703b.css.map",
-    "main.c4a7cdad.js.map": "/static/js/main.c4a7cdad.js.map"
+    "main.3bd7de5f.css.map": "/static/css/main.3bd7de5f.css.map",
+    "main.e8680a35.js.map": "/static/js/main.e8680a35.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6e3703b.css",
-    "static/js/main.c4a7cdad.js"
+    "static/css/main.3bd7de5f.css",
+    "static/js/main.e8680a35.js"
   ]
 }
