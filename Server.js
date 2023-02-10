@@ -9,6 +9,7 @@ const depositRoutes = require("./routes/deposit");
 const accountRoutes = require("./routes/account");
 const withdrawRoutes = require("./routes/withdraw");
 const adminRoutes = require("./routes/adminRoutes");
+const passwordRoutes = require("./routes/resetPassword");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
 app.use("/api/deposit", depositRoutes);
 app.use("/api/withdraw", withdrawRoutes);
+app.use("/api/password", passwordRoutes);
 
 // AdminRoutes
 app.use("/api/admin", adminRoutes);
