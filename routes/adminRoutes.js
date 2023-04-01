@@ -12,7 +12,7 @@ router.get("/deposit/:userId", authenticateJWT, adminController.getDeposit);
 router.put("/deposit/edit/:userId", authenticateJWT, adminController.update);
 router.delete("/deposit/:userId", authenticateJWT, adminController.deleteDeposit);
 
-// Admin User Routes
+// Admin withdrawl Routes
 router.get("/withdrawls", authenticateJWT, adminController.getWithdrawals);
 router.get("/withdraw/:userId", authenticateJWT, adminController.getWithdraw);
 router.put("/withdraw/edit/:userId", authenticateJWT, adminController.updateWithdraw);
