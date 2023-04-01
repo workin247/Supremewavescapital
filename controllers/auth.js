@@ -98,9 +98,7 @@ exports.signinController = async (req, res) => {
     }
     if (!user.referralCode) {
       let referralCode = shortid.generate() + user.userName;
-      await User.update({ _id: id }, { $push: { referralCode: referralCode } });
-      await User.update({ _id: id }, { $push: { refbonus: 0 } });
-      await User.update({ _id: id }, { $push: { referrer: "" } });
+      await User.updateOne({ _id: id }, { $set: { referralCode: referralCode, refbonus: 0, referrer: "" } });
     }
     const payload = {
       user: {
