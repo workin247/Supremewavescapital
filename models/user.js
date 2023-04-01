@@ -39,10 +39,22 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    refbonus:{
+        type: Number,
+        default: 0
+    },
     role:{
         type: Number,
         default: 0
     },
+    referralCode: {
+        type: String,
+        unique: true,
+      },
+    referrer: {
+        type: String,
+        unique: true,
+      },
     verified:{
         type: Boolean,
         default: false
