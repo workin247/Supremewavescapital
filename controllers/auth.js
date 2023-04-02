@@ -97,8 +97,9 @@ exports.signinController = async (req, res) => {
       });
     }
     if (!user.referralCode) {
+      console.log("No Referral code");
       let referralCode = shortid.generate() + user.userName;
-      await User.updateOne({ _id: id }, { $set: { referralCode: referralCode, refbonus: 0, referrer: "" } });
+      await User.updateMany({ email: email }, { $set: { referralCode: referralCode, refbonus: 0, referrer: "" } });
     }
     const payload = {
       user: {
